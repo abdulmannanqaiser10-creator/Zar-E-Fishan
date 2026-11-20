@@ -1,0 +1,36 @@
+:root {
+  --color-olive: #3f4932;
+  --color-olive-dark: #2d3424;
+  --color-olive-light: #536043;
+  --color-gold: #c5a675;
+  --color-gold-light: #d4bc91;
+  --color-gold-dark: #a88a55;
+  --color-cream: #f8f5ed;
+  --color-cream-dark: #efe9dc;
+  --color-white: #ffffff;
+  --color-text: #2a2e24;
+  --color-text-muted: #5c6354;
+  --color-border: rgba(197, 166, 117, 0.35);
+  --color-shadow: rgba(63, 73, 50, 0.12);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+
+  --shadow-soft: 0 10px 40px var(--color-shadow);
+  --shadow-card: 0 8px 30px rgba(63, 73, 50, 0.08);
+  --shadow-elevated: 0 20px 60px rgba(63, 73, 50, 0.16);
+
+  --header-height: 80px;
+  --container: 1200px;
+  --transition: 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  --z-header: 1000;
+  --z-overlay: 1100;
+  --z-modal: 1200;
+  --z-toast: 1300;
+}

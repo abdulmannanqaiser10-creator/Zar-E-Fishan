@@ -1,0 +1,107 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  padding: 0.65rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-olive);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.filter-btn:hover,
+.filter-btn.is-active {
+  background: var(--color-olive);
+  border-color: var(--color-olive);
+  color: var(--color-cream);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.project-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 320px;
+  cursor: pointer;
+  isolation: isolate;
+  border: 1px solid var(--color-border);
+  background: var(--color-olive);
+}
+
+.project-card--tall {
+  min-height: 420px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease, filter 0.4s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.07);
+  filter: brightness(0.85);
+}
+
+.project-card__info {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.4rem;
+  background: linear-gradient(transparent, rgba(45, 52, 36, 0.92));
+  color: var(--color-cream);
+  transform: translateY(8px);
+  opacity: 0.95;
+  transition: transform var(--transition);
+}
+
+.project-card:hover .project-card__info {
+  transform: translateY(0);
+}
+
+.project-card__info span {
+  color: var(--color-gold);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.project-card__info h3 {
+  color: var(--color-cream);
+  margin-top: 0.35rem;
+  font-size: 1.35rem;
+}
+
+.project-card__info p {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: rgba(248, 245, 237, 0.8);
+}
+
+@media (max-width: 1000px) {
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card,
+  .project-card--tall {
+    min-height: 280px;
+  }
+}
