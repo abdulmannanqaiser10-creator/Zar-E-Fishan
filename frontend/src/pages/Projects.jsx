@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import SEO from '../components/SEO';
 import ProjectModal from '../components/ProjectModal';
@@ -8,6 +9,7 @@ import '../styles/projects.css';
 const Projects = () => {
   const [filter, setFilter] = useState('All');
   const [selected, setSelected] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const filtered = useMemo(() => {
     if (filter === 'All') return projects;
@@ -16,40 +18,28 @@ const Projects = () => {
     );
   }, [filter]);
 
+  const visible = showAll ? filtered : filtered.slice(0, 6);
+
   return (
     <>
       <SEO
-        title="Projects | Zar-E-Fishan"
-        description="Browse Zar-E-Fishan's portfolio of residential and commercial interior design projects."
+        title="Our Projects | ZAR-E-FISHAN INTERIORS"
+        description="Ideas brought to life — explore residential, commercial, modern and luxury interior projects."
       />
 
-      <section
-        className="page-hero"
-        style={{
-          '--hero-image':
-            "url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=80')",
-        }}
-      >
+      <section className="section projects-page">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            className="section-head section-head--center projects-page__head"
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
           >
-            <span className="section-label" style={{ color: 'var(--color-gold)' }}>
-              Portfolio
-            </span>
-            <h1>Selected projects</h1>
-            <p>
-              Explore residential and commercial interiors shaped by light, material,
-              and carefully considered detail.
-            </p>
+            <p className="section-label">Portfolio</p>
+            <h1 className="projects-page__title">
+              Ideas Brought <em>to Life</em>
+            </h1>
           </motion.div>
-        </div>
-      </section>
 
-      <section className="section">
-        <div className="container">
           <div className="filters" role="tablist" aria-label="Project categories">
             {projectCategories.map((category) => (
               <button
@@ -58,7 +48,10 @@ const Projects = () => {
                 role="tab"
                 aria-selected={filter === category}
                 className={`filter-btn ${filter === category ? 'is-active' : ''}`}
-                onClick={() => setFilter(category)}
+                onClick={() => {
+                  setFilter(category);
+                  setShowAll(false);
+                }}
               >
                 {category}
               </button>
@@ -67,15 +60,14 @@ const Projects = () => {
 
           <motion.div layout className="projects-grid">
             <AnimatePresence mode="popLayout">
-              {filtered.map((project, i) => (
+              {visible.map((project) => (
                 <motion.article
                   layout
                   key={project.id}
-                  className={`project-card ${i % 5 === 0 ? 'project-card--tall' : ''}`}
-                  initial={{ opacity: 0, scale: 0.96 }}
+                  className="project-card"
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.35 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
                   onClick={() => setSelected(project)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -88,17 +80,30 @@ const Projects = () => {
                   aria-label={`View details for ${project.title}`}
                 >
                   <img src={project.image} alt={project.title} loading="lazy" />
-                  <div className="project-card__info">
+                  <div className="project-card__overlay">
                     <span>{project.category}</span>
                     <h3>{project.title}</h3>
-                    <p>
-                      {project.location} · {project.year}
-                    </p>
                   </div>
                 </motion.article>
               ))}
             </AnimatePresence>
           </motion.div>
+
+          <div className="section-cta">
+            {filtered.length > 6 && !showAll ? (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setShowAll(true)}
+              >
+                View More Projects →
+              </button>
+            ) : (
+              <Link to="/contact" className="btn btn-primary">
+                Start Your Project →
+              </Link>
+            )}
+          </div>
         </div>
       </section>
 

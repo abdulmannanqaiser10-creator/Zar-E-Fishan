@@ -26,6 +26,12 @@ const contactSchema = new mongoose.Schema(
       trim: true,
       maxlength: [150, 'Subject cannot exceed 150 characters'],
     },
+    budget: {
+      type: String,
+      required: [true, 'Budget range is required'],
+      trim: true,
+      maxlength: [80, 'Budget cannot exceed 80 characters'],
+    },
     message: {
       type: String,
       required: [true, 'Message is required'],

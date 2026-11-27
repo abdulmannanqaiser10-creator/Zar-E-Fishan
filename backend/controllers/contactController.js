@@ -1,14 +1,15 @@
-import Contact from '../models/Contact.js';
+import { saveContact } from '../utils/contactStore.js';
 
 export const createContact = async (req, res, next) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
+    const { name, email, phone, subject, budget, message } = req.body;
 
-    const contact = await Contact.create({
+    const saved = await saveContact({
       name,
       email,
       phone: phone || '',
       subject,
+      budget: budget || '',
       message,
     });
 
@@ -16,22 +17,13 @@ export const createContact = async (req, res, next) => {
       success: true,
       message: 'Thank you for contacting Zar-E-Fishan. We will respond shortly.',
       data: {
-        id: contact._id,
-        name: contact.name,
-        email: contact.email,
-        subject: contact.subject,
-        createdAt: contact.createdAt,
+        id: saved.id,
+        name: saved.name,
+        email: saved.email,
+        subject: saved.subject,
+        createdAt: saved.createdAt,
       },
     });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const getContacts = async (req, res, next) => {
-  try {
-    const contacts = await Contact.find().sort({ createdAt: -1 }).limit(50);
-    res.status(200).json({ success: true, count: contacts.length, data: contacts });
   } catch (error) {
     next(error);
   }

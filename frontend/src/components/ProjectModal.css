@@ -2,11 +2,11 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-modal);
-  background: rgba(45, 52, 36, 0.72);
+  background: rgba(37, 45, 25, 0.72);
   backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
-  padding: 1.25rem;
+  padding: 1.15rem;
 }
 
 .project-modal__dialog {
@@ -24,64 +24,85 @@
   top: 0.85rem;
   right: 0.85rem;
   z-index: 2;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: none;
   background: var(--color-olive);
   color: var(--color-cream);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   line-height: 1;
   cursor: pointer;
 }
 
 .project-modal__media img {
   width: 100%;
-  height: min(42vh, 360px);
+  height: min(42vh, 340px);
   object-fit: cover;
 }
 
 .project-modal__body {
-  padding: 1.75rem 1.75rem 2rem;
+  padding: 1.5rem 1.5rem 1.85rem;
 }
 
 .project-modal__body h2 {
-  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
 }
 
 .project-modal__meta {
-  color: var(--color-gold-dark);
-  margin: 0.5rem 0 1rem;
+  color: var(--color-gold);
+  margin: 0.4rem 0 0.9rem;
   font-weight: 500;
 }
 
 .project-modal__compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.75rem;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
 }
 
 .project-modal__compare span {
   display: inline-block;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.74rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-gold-dark);
+  color: var(--color-gold);
   font-weight: 600;
 }
 
-.project-modal__compare img {
+.project-modal__compare img,
+.project-modal__gallery img {
   width: 100%;
-  height: 180px;
+  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
+  object-position: center;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
+  background: var(--color-beige);
+}
+
+.project-modal__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.project-modal__body p {
+  color: var(--color-text);
+  line-height: 1.75;
+}
+
+.project-modal__body h2 {
+  color: var(--color-heading);
 }
 
 @media (max-width: 700px) {
-  .project-modal__compare {
+  .project-modal__compare,
+  .project-modal__gallery {
     grid-template-columns: 1fr;
   }
 }

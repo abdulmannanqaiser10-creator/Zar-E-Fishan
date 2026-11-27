@@ -6,3 +6,9 @@ build/
 *.log
 coverage/
 .vite/
+
+.vercel
+.env*
+tools-atlas/
+atlas-cli.zip
+*.zip

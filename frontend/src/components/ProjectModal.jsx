@@ -16,6 +16,15 @@ const ProjectModal = ({ project, onClose }) => {
     };
   }, [project, onClose]);
 
+  const hasCompare =
+    project?.beforeImage &&
+    project?.afterImage &&
+    project.beforeImage !== project.afterImage;
+
+  const gallery = (project?.gallery || []).filter(
+    (src, index, list) => src && list.indexOf(src) === index
+  );
+
   return (
     <AnimatePresence>
       {project && (
@@ -53,16 +62,28 @@ const ProjectModal = ({ project, onClose }) => {
               </p>
               <p>{project.description}</p>
 
-              <div className="project-modal__compare">
-                <div>
-                  <span>Before</span>
-                  <img src={project.beforeImage} alt={`${project.title} before`} loading="lazy" />
+              {hasCompare && (
+                <div className="project-modal__compare">
+                  <div>
+                    <span>Before</span>
+                    <img src={project.beforeImage} alt={`${project.title} before`} loading="lazy" />
+                  </div>
+                  <div>
+                    <span>After</span>
+                    <img src={project.afterImage} alt={`${project.title} after`} loading="lazy" />
+                  </div>
                 </div>
-                <div>
-                  <span>After</span>
-                  <img src={project.afterImage} alt={`${project.title} after`} loading="lazy" />
+              )}
+
+              {!hasCompare && gallery.length > 1 && (
+                <div className="project-modal__gallery">
+                  {gallery
+                    .filter((src) => src !== project.image)
+                    .map((src) => (
+                      <img key={src} src={src} alt={`${project.title} detail`} loading="lazy" />
+                    ))}
                 </div>
-              </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

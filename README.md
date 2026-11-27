@@ -2,18 +2,24 @@
 
 A luxury interior design website for **Zar-E-Fishan**, built with React (Vite) and Node.js / Express, with MongoDB for contact form submissions.
 
+## Live Website
+
+- **Production:** https://zar-e-fishan.vercel.app
+- **Vercel project:** https://vercel.com/abdulmannanqaiser10-8796/zar-e-fishan
+
 ## Project Structure
 
 ```text
 web/
 ├── frontend/   # React + Vite application (port 5173)
-└── backend/    # Express API (port 5000)
+├── backend/    # Express API (port 5000 / Vercel serverless)
+└── vercel.json # Vercel multi-service deployment config
 ```
 
 ## Prerequisites
 
 - Node.js 18+
-- MongoDB running locally, or a MongoDB Atlas connection string
+- MongoDB running locally, or a MongoDB Atlas connection string (required for production contact form)
 
 ## Backend Setup
 
@@ -38,6 +44,25 @@ PORT=5000
 NODE_ENV=development
 MONGODB_URI=mongodb://127.0.0.1:27017/zar-e-fishan
 CLIENT_URL=http://localhost:5173
+```
+
+### Production (Vercel)
+
+Deployed as a multi-service Vercel project (Vite frontend + Express API).
+
+Required / optional production env vars:
+
+| Variable | Required | Notes |
+|---|---|---|
+| `BLOB_READ_WRITE_TOKEN` | Auto-set | Vercel Blob store for contact submissions |
+| `CLIENT_URL` | Recommended | `https://zar-e-fishan.vercel.app` |
+| `MONGODB_URI` | Optional | MongoDB Atlas URI; used when set (preferred over Blob) |
+
+To use MongoDB Atlas in production, create a free cluster, allow network access `0.0.0.0/0`, then:
+
+```bash
+npx vercel env add MONGODB_URI production
+npx vercel deploy --prod
 ```
 
 ## Frontend Setup

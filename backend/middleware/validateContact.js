@@ -25,6 +25,12 @@ export const contactValidationRules = [
     .withMessage('Subject is required')
     .isLength({ max: 150 })
     .withMessage('Subject cannot exceed 150 characters'),
+  body('budget')
+    .trim()
+    .notEmpty()
+    .withMessage('Please select a budget range')
+    .isLength({ max: 80 })
+    .withMessage('Budget cannot exceed 80 characters'),
   body('message')
     .trim()
     .notEmpty()

@@ -7,16 +7,37 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 import PageLoader from './components/PageLoader';
 
 const ScrollToTopOnRoute = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) {
+      const id = decodeURIComponent(hash.replace('#', ''));
+      const scrollToHash = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return true;
+        }
+        return false;
+      };
+
+      if (!scrollToHash()) {
+        const timer = window.setTimeout(scrollToHash, 80);
+        return () => window.clearTimeout(timer);
+      }
+      return undefined;
+    }
+
     window.scrollTo(0, 0);
-  }, [pathname]);
+    return undefined;
+  }, [pathname, hash]);
 
   return null;
 };
@@ -30,6 +51,8 @@ const AppRoutes = () => (
         <Route path="about" element={<About />} />
         <Route path="services" element={<Services />} />
         <Route path="projects" element={<Projects />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:id" element={<BlogDetail />} />
         <Route path="contact" element={<Contact />} />
         <Route path="404" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/404" replace />} />

@@ -1,161 +1,167 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEO from '../components/SEO';
-import { milestones } from '../data/testimonials';
+import founderImage from '../assets/founder-ibad-imran-memon.jpg';
+import { aboutPhilosophy } from '../data/site';
 import '../styles/about.css';
 
 const fadeUp = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 22 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55 },
+  transition: { duration: 0.5 },
+};
+
+const PhilosophyIcon = ({ type }) => {
+  const common = {
+    viewBox: '0 0 24 24',
+    width: '24',
+    height: '24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: '1.5',
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    'aria-hidden': true,
+  };
+
+  if (type === 'elegance') {
+    return (
+      <svg {...common}>
+        <path d="M12 3l2.2 6.6H21l-5.4 4 2.1 6.4L12 16.8 6.3 20l2.1-6.4L3 9.6h6.8L12 3Z" />
+      </svg>
+    );
+  }
+  if (type === 'function') {
+    return (
+      <svg {...common}>
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <path d="M4 10h16M10 4v16" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
 };
 
 const About = () => (
   <>
     <SEO
-      title="About | Zar-E-Fishan"
-      description="Discover the story, vision, and design philosophy behind Zar-E-Fishan — a premium interior design studio."
+      title="About Us | ZAR-E-FISHAN INTERIORS"
+      description="Crafting beautiful spaces since day one. Learn about Zar-e-Fishan Interiors."
     />
 
-    <section
-      className="page-hero"
-      style={{
-        '--hero-image':
-          "url('https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1800&q=80')",
-      }}
-    >
-      <div className="container">
+    <section className="section about-hero">
+      <div className="container about-hero__grid">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="about-hero__copy"
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
         >
-          <span className="section-label" style={{ color: 'var(--color-gold)' }}>
-            About Us
-          </span>
-          <h1>Design with quiet confidence</h1>
+          <p className="section-label">About Us</p>
+          <h1>
+            Crafting Beautiful Spaces <em>Since Day One</em>
+          </h1>
           <p>
-            Zar-E-Fishan is a luxury interior design studio devoted to creating
-            spaces that feel timeless, personal, and deeply lived-in.
+            Established in 2025, Zar-e-Fishan Interiors transforms residential, commercial
+            and corporate spaces through thoughtful design, quality materials and
+            professional execution. Every project is guided by clarity, craft and care.
           </p>
+          <p>
+            From first consultation to final styling, we create interiors that feel calm,
+            refined and genuinely livable — with personal attention at every stage.
+          </p>
+          <Link to="/contact" className="btn btn-primary">
+            Start a Project →
+          </Link>
         </motion.div>
-      </div>
-    </section>
 
-    <section className="section">
-      <div className="container about-intro">
-        <motion.div {...fadeUp}>
-          <span className="section-label">Our Story</span>
-          <h2 className="section-title">Where craft meets atmosphere</h2>
-          <div className="gold-line" />
-          <p style={{ color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
-            Founded with a belief that interiors should age gracefully, Zar-E-Fishan
-            began as a boutique atelier specializing in residential sanctuaries.
-            Today, we design homes, workplaces, and hospitality spaces with the same
-            devotion to proportion, material, and light.
-          </p>
-          <p style={{ color: 'var(--color-text-muted)' }}>
-            Our vision is simple: elevate everyday living through considered design —
-            never loud, always enduring.
-          </p>
-        </motion.div>
-        <motion.div className="about-intro__image" {...fadeUp}>
+        <motion.div
+          className="about-hero__media"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+        >
           <img
-            src="https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=1200&q=80"
-            alt="Elegant interior design studio atmosphere"
-            loading="lazy"
+            src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80"
+            alt="Luxury armchair in a calm interior"
+            loading="eager"
           />
         </motion.div>
       </div>
     </section>
 
-    <section className="section" style={{ background: 'var(--color-cream-dark)' }}>
-      <div className="container">
-        <motion.div {...fadeUp}>
-          <span className="section-label">Mission & Values</span>
-          <h2 className="section-title">What guides every project</h2>
+    <section className="section about-philosophy">
+      <div className="container about-philosophy__grid">
+        <motion.div className="about-philosophy__media" {...fadeUp}>
+          <img
+            src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80"
+            alt="Elegant dining room interior"
+            loading="lazy"
+          />
         </motion.div>
-        <div className="values-grid">
-          {[
-            {
-              title: 'Mission',
-              text: 'To craft interiors that balance beauty and function — spaces people return to with ease and pride.',
-            },
-            {
-              title: 'Philosophy',
-              text: 'Less decoration, more intention. We design for light, ritual, and the quiet luxury of well-chosen materials.',
-            },
-            {
-              title: 'Values',
-              text: 'Integrity, collaboration, and meticulous detailing from first consultation through final installation.',
-            },
-          ].map((item, i) => (
-            <motion.article
-              key={item.title}
-              className="value-card"
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-            >
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </motion.article>
-          ))}
-        </div>
+        <motion.div className="about-philosophy__content" {...fadeUp}>
+          <p className="section-label">Our Philosophy</p>
+          <h2>
+            Design that feels as good as it <em>looks</em>
+          </h2>
+          <p>
+            We believe beautiful spaces should also work beautifully. Our approach balances
+            aesthetics with practicality — light, flow, materials and detail — so every
+            interior supports the way you live and work.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="container about-philosophy__values">
+        {aboutPhilosophy.map((item, i) => (
+          <motion.article
+            key={item.id}
+            className="philosophy-card"
+            {...fadeUp}
+            transition={{ ...fadeUp.transition, delay: i * 0.05 }}
+          >
+            <span className="philosophy-card__icon">
+              <PhilosophyIcon type={item.icon} />
+            </span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </motion.article>
+        ))}
       </div>
     </section>
 
-    <section className="section">
+    <section className="section" id="founder">
       <div className="container">
-        <motion.div className="designer-block" {...fadeUp}>
-          <div className="designer-block__image">
+        <motion.div className="founder-block" {...fadeUp}>
+          <div className="founder-block__image">
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80"
-              alt="Lead interior designer"
+              src={founderImage}
+              alt="Ibad Imran Memon, Founder and Director of Zar-e-Fishan Interiors"
               loading="lazy"
             />
           </div>
-          <div className="designer-block__content">
-            <span className="section-label" style={{ color: 'var(--color-gold)' }}>
-              Principal Designer
-            </span>
-            <h2>Ayesha Farooq</h2>
+          <div className="founder-block__content">
+            <p className="section-label">About Founder</p>
+            <h2>Ibad Imran Memon</h2>
+            <p className="founder-role">Founder & Director – Zar-e-Fishan Interiors</p>
+            <div className="gold-line" />
             <p>
-              With over a decade of experience in luxury residential and commercial
-              interiors, Ayesha leads Zar-E-Fishan with a refined eye for composition
-              and a deep respect for how people inhabit space.
+              Ibad Imran Memon is the Founder and Director of Zar-e-Fishan Interiors. With
+              seven years of professional experience in the construction-related industry
+              and a background in ACCA studies, he brings a strong understanding of business
+              operations, project management and the construction sector.
             </p>
             <p>
-              Her work is defined by layered neutrals, sculptural furniture, and a
-              seamless dialogue between architecture and interior atmosphere.
+              Driven by a passion for interior design, he established Zar-e-Fishan Interiors
+              to provide practical, elegant and thoughtfully planned interior solutions.
             </p>
           </div>
         </motion.div>
-      </div>
-    </section>
-
-    <section className="section" style={{ background: 'var(--color-cream-dark)' }}>
-      <div className="container">
-        <motion.div {...fadeUp}>
-          <span className="section-label">Milestones</span>
-          <h2 className="section-title">A decade of considered growth</h2>
-        </motion.div>
-        <div className="timeline">
-          {milestones.map((item, i) => (
-            <motion.div
-              key={item.year}
-              className="timeline-item"
-              {...fadeUp}
-              transition={{ ...fadeUp.transition, delay: i * 0.06 }}
-            >
-              <div className="timeline-item__dot" aria-hidden="true" />
-              <div className="timeline-item__card">
-                <span>{item.year}</span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   </>
