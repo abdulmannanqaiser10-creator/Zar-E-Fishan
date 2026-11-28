@@ -11,8 +11,8 @@ const BrandLogo = ({ variant = 'dark', className = '' }) => (
       src="/logo.png"
       alt="ZAR-E-FISHAN INTERIORS"
       className="brand-logo__img"
-      width="180"
-      height="64"
+      width="1080"
+      height="911"
       decoding="async"
     />
   </Link>
